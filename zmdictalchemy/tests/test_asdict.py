@@ -1,6 +1,6 @@
 # vim: set fileencoding=utf-8 :
 from __future__ import absolute_import, division
-from dictalchemy.tests import (
+from zmdictalchemy.tests import (
     TestCase,
     Named,
     NamedOtherColumnName,
@@ -201,18 +201,18 @@ class TestAsdict(TestCase):
     def test_default_include(self):
         assert WithDefaultInclude(2).asdict() == {'id': 2, 'id_alias': 2}
 
-    def test_dictalchemy_include(self):
+    def test_zmdictalchemy_include(self):
         m = WithHybrid(2)
         assert 'value' not in dict(m)
-        setattr(m, 'dictalchemy_include', ['value'])
+        setattr(m, 'zmdictalchemy_include', ['value'])
         assert 'value' in dict(m)
 
-    def test_dictalchemy_asdict_include_overrides(self):
+    def test_zmdictalchemy_asdict_include_overrides(self):
         m = WithHybrid(2)
         assert 'value' not in dict(m)
-        setattr(m, 'dictalchemy_include', ['value'])
+        setattr(m, 'zmdictalchemy_include', ['value'])
         assert 'value' in dict(m)
-        setattr(m, 'dictalchemy_asdict_include', [])
+        setattr(m, 'zmdictalchemy_asdict_include', [])
         assert 'value' not in dict(m)
 
     def test_attribute_mapped_collection(self):

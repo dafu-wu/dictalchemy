@@ -1,9 +1,9 @@
-.. module:: dictalchemy
+.. module:: zmdictalchemy
 
-Dictalchemy
+Zmdictalchemy
 ===========
 
-Dictalchemy adds :func:`utils.asdict` and :func:`utils.fromdict` methods to `SQLAlchemy <http://www.sqlalchemy.org/>`_ declarative models.
+Zmdictalchemy adds :func:`utils.asdict` and :func:`utils.fromdict` methods to `SQLAlchemy <http://www.sqlalchemy.org/>`_ declarative models.
 
 Currently this works with synonyms and simple relationships as one-to-many and many-to-many. Relationships can be followed in many levels.
 
@@ -14,7 +14,7 @@ Using DictableModel
 
 Example usage::
 
-    from dictalchemy import DictableModel
+    from zmdictalchemy import DictableModel
     from slqlachemy.ext.declarative import declarative_base
     Base = declarative_base(cls=DictableModel)
 
@@ -31,7 +31,7 @@ Example::
 Default values
 --------------
 
-Default values are defined in :mod:`dictalchemy.constants`.
+Default values are defined in :mod:`zmdictalchemy.constants`.
 
 Using asdict()
 --------------
@@ -79,7 +79,7 @@ The `asdict` argument `method`
 .. Note::
   New in v 0.1.2.1
 
-The argument `method` is used to determine which method asdict should call when following relations. If `method` is set in the follow arguments that method will be used instead. See the HAL example in :meth:`dictalchemy.utils.asdict`.
+The argument `method` is used to determine which method asdict should call when following relations. If `method` is set in the follow arguments that method will be used instead. See the HAL example in :meth:`zmdictalchemy.utils.asdict`.
 
 Using fromdict()
 ----------------
@@ -141,28 +141,28 @@ Using only::
 API
 ---
 
-.. automodule:: dictalchemy.classes
+.. automodule:: zmdictalchemy.classes
     :special-members:
 
-.. automodule:: dictalchemy.utils
+.. automodule:: zmdictalchemy.utils
 
-.. automodule:: dictalchemy.errors
+.. automodule:: zmdictalchemy.errors
 
-.. automodule:: dictalchemy.constants
+.. automodule:: zmdictalchemy.constants
 
 Python versions
 ---------------
 
-Dictalchemy supports python 2.7.3 and python 3.3 through `2to3`. Other versions are not tested.
+Zmdictalchemy supports python 2.7.3 and python 3.3 through `2to3`. Other versions are not tested.
 
 Source
 ------
 
-The source is hosted on `http://github.com/danielholmstrom/dictalchemy <http://github.com/danielholmstrom/dictalchemy>`_.
+The source is hosted on `http://github.com/dafu-wu/zmdictalchemy <http://github.com/dafu-wu/zmdictalchemy>`_.
 
 License
 -------
 
-dictalchemy is released under the MIT license.
+zmdictalchemy is released under the MIT license.
 
 .. toctree::

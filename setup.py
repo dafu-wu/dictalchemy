@@ -1,13 +1,13 @@
 """
 ~~~~~~~~~~~
-Dictalchemy
+Zmdictalchemy
 ~~~~~~~~~~~
 
 Contains asdict() and fromdict() methods that will work on SQLAlchemy
 declarative models.
 
 Read more in the source or on github
-<https://github.com/danielholmstrom/dictalchemy>.
+<https://github.com/dafu-wu/zmdictalchemy>.
 """
 
 import os
@@ -29,15 +29,15 @@ extra = {}
 if sys.version_info >= (3,):
     extra['use_2to3'] = True
 
-setup(name='dictalchemy',
-      version='0.1.2.7',
+setup(name='zmdictalchemy',
+      version='0.1.2.8',
       description="Contains asdict and fromdict methods for SQL-Alchemy "
       "declarative models",
       long_description=README,
-      url='http://github.com/danielholmstrom/dictalchemy/',
+      url='http://github.com/dafu-wu/zmdictalchemy/',
       license='MIT',
-      author='Daniel Holmstrom',
-      author_email='holmstrom.daniel@gmail.com',
+      author='Dadu Wu',
+      author_email='wucy4328@gmail.com',
       platforms='any',
       classifiers=['Development Status :: 4 - Beta',
                    'License :: OSI Approved :: MIT License',
@@ -53,5 +53,5 @@ setup(name='dictalchemy',
       zip_safe=False,
       install_requires=install_requires,
       tests_require=test_requires,
-      test_suite='dictalchemy',
+      test_suite='zmdictalchemy',
       **extra)

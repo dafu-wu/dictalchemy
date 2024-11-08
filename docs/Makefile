@@ -77,17 +77,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/Dictalchemy.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/Zmdictalchemy.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/Dictalchemy.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/Zmdictalchemy.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/Dictalchemy"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/Dictalchemy"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/Zmdictalchemy"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/Zmdictalchemy"
 	@echo "# devhelp"
 
 epub:

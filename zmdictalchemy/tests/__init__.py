@@ -1,8 +1,8 @@
 # vim: set fileencoding=utf-8 :
 from __future__ import absolute_import, division
 
-from dictalchemy import DictableModel
-from dictalchemy.utils import arg_to_dict
+from zmdictalchemy import DictableModel
+from zmdictalchemy.utils import arg_to_dict
 import unittest
 
 from sqlalchemy import create_engine
@@ -236,7 +236,7 @@ class WithDefaultInclude(Base):
 
     __tablename__ = 'withdefaultinclude'
 
-    dictalchemy_include = ['id_alias']
+    zmdictalchemy_include = ['id_alias']
 
     id = Column('id', Integer, primary_key=True)
 

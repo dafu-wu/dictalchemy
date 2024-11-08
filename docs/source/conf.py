@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Dictalchemy documentation build configuration file, created by
+# Zmdictalchemy documentation build configuration file, created by
 # sphinx-quickstart on Sat Dec 29 16:18:08 2012.
 #
 # This file is execfile()d with the current directory set to its containing dir.
@@ -43,7 +43,7 @@ autodoc_default_flags = ['members', 'show-inheritance']
 master_doc = 'index'
 
 # General information about the project.
-project = u'Dictalchemy'
+project = u'Zmdictalchemy'
 copyright = u'2012, Daniel Holmström'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -167,7 +167,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Dictalchemydoc'
+htmlhelp_basename = 'Zmdictalchemydoc'
 
 
 # -- Options for LaTeX output --------------------------------------------------
@@ -186,7 +186,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Dictalchemy.tex', u'Dictalchemy Documentation',
+  ('index', 'Zmdictalchemy.tex', u'Zmdictalchemy Documentation',
    u'Daniel Holmström', 'manual'),
 ]
 
@@ -216,7 +216,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'dictalchemy', u'Dictalchemy Documentation',
+    ('index', 'zmdictalchemy', u'Zmdictalchemy Documentation',
      [u'Daniel Holmström'], 1)
 ]
 
@@ -230,8 +230,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'Dictalchemy', u'Dictalchemy Documentation',
-   u'Daniel Holmström', 'Dictalchemy', 'One line description of project.',
+  ('index', 'Zmdictalchemy', u'Zmdictalchemy Documentation',
+   u'Daniel Holmström', 'Zmdictalchemy', 'One line description of project.',
    'Miscellaneous'),
 ]
 

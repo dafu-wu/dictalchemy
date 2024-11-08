@@ -13,8 +13,8 @@ from sqlalchemy.ext.associationproxy import _AssociationList
 from sqlalchemy.orm.dynamic import AppenderMixin
 from sqlalchemy.orm.query import Query
 
-from dictalchemy import constants
-from dictalchemy import errors
+from zmdictalchemy import constants
+from zmdictalchemy import errors
 
 
 def arg_to_dict(arg):
@@ -61,24 +61,24 @@ def asdict(model, exclude=None, exclude_underscore=None, exclude_pk=None,
             added in the response dict. If 'parent' is set the relationship \
             will be added with it's own key as a child to `parent`.
     :param exclude: List of properties that should be excluded, will be \
-            merged with `model.dictalchemy_exclude`
+            merged with `model.zmdictalchemy_exclude`
     :param exclude_pk: If True any column that refers to the primary key will \
             be excluded.
-    :param exclude_underscore: Overides `model.dictalchemy_exclude_underscore`\
+    :param exclude_underscore: Overides `model.zmdictalchemy_exclude_underscore`\
             if set
     :param include: List of properties that should be included. Use this to \
             allow python properties to be called. This list will be merged \
-            with `model.dictalchemy_asdict_include` or \
-            `model.dictalchemy_include`.
+            with `model.zmdictalchemy_asdict_include` or \
+            `model.zmdictalchemy_include`.
     :param only: List of properties that should be included. This will \
             override everything else except `follow`.
     :param method: Name of the method that is currently called. This will be \
             the default method used in 'follow' unless another method is\
             set.
 
-    :raises: :class:`dictalchemy.errors.MissingRelationError` \
+    :raises: :class:`zmdictalchemy.errors.MissingRelationError` \
             if `follow` contains a non-existent relationship.
-    :raises: :class:`dictalchemy.errors.UnsupportedRelationError` If `follow` \
+    :raises: :class:`zmdictalchemy.errors.UnsupportedRelationError` If `follow` \
             contains an existing relationship that currently isn't supported.
 
     :returns: dict
@@ -96,11 +96,11 @@ def asdict(model, exclude=None, exclude_underscore=None, exclude_pk=None,
         attrs = only
     else:
         exclude = exclude or []
-        exclude += getattr(model, 'dictalchemy_exclude',
+        exclude += getattr(model, 'zmdictalchemy_exclude',
                            constants.default_exclude) or []
         if exclude_underscore is None:
             exclude_underscore = getattr(model,
-                                         'dictalchemy_exclude_underscore',
+                                         'zmdictalchemy_exclude_underscore',
                                          constants.default_exclude_underscore)
         if exclude_underscore:
             # Exclude all properties starting with underscore
@@ -109,9 +109,9 @@ def asdict(model, exclude=None, exclude_underscore=None, exclude_pk=None,
             exclude += [c.key for c in info.mapper.primary_key]
 
         include = (include or []) + (getattr(model,
-                                             'dictalchemy_asdict_include',
+                                             'zmdictalchemy_asdict_include',
                                              getattr(model,
-                                                     'dictalchemy_include',
+                                                     'zmdictalchemy_include',
                                                      None)) or [])
         attrs = [k for k in columns + synonyms + include if k not in exclude]
 
@@ -187,7 +187,7 @@ def fromdict(model, data, exclude=None, exclude_underscore=None,
              allow_pk=None, follow=None, include=None, only=None):
     """Update a model from a dict
 
-    Works almost identically as :meth:`dictalchemy.utils.asdict`. However, it
+    Works almost identically as :meth:`zmdictalchemy.utils.asdict`. However, it
     will not create missing instances or update collections.
 
     This method updates the following properties on a model:
@@ -199,9 +199,9 @@ def fromdict(model, data, exclude=None, exclude_underscore=None,
     :param data: dict of data
     :param exclude: list of properties that should be excluded
     :param exclude_underscore: If True underscore properties will be excluded,\
-            if set to None model.dictalchemy_exclude_underscore will be used.
+            if set to None model.zmdictalchemy_exclude_underscore will be used.
     :param allow_pk: If True any column that refers to the primary key will \
-            be excluded. Defaults model.dictalchemy_fromdict_allow_pk or \
+            be excluded. Defaults model.zmdictalchemy_fromdict_allow_pk or \
             dictable.constants.fromdict_allow_pk. If set to True a primary \
             key can still be excluded with the `exclude` parameter.
     :param follow: Dict of relations that should be followed, the key is the \
@@ -213,7 +213,7 @@ def fromdict(model, data, exclude=None, exclude_underscore=None,
     :param only: List of the only properties that should be set. This \
             will not override `allow_pk` or `follow`.
 
-    :raises: :class:`dictalchemy.errors.DictalchemyError` If a primary key is \
+    :raises: :class:`zmdictalchemy.errors.ZmdictalchemyError` If a primary key is \
             in data and allow_pk is False
 
     :returns: The model
@@ -229,18 +229,18 @@ def fromdict(model, data, exclude=None, exclude_underscore=None,
     primary_keys = [c.key for c in info.mapper.primary_key]
 
     if allow_pk is None:
-        allow_pk = getattr(model, 'dictalchemy_fromdict_allow_pk',
+        allow_pk = getattr(model, 'zmdictalchemy_fromdict_allow_pk',
                            constants.default_fromdict_allow_pk)
 
     if only:
         valid_keys = only
     else:
         exclude = exclude or []
-        exclude += getattr(model, 'dictalchemy_exclude',
+        exclude += getattr(model, 'zmdictalchemy_exclude',
                            constants.default_exclude) or []
         if exclude_underscore is None:
             exclude_underscore = getattr(model,
-                                         'dictalchemy_exclude_underscore',
+                                         'zmdictalchemy_exclude_underscore',
                                          constants.default_exclude_underscore)
 
         if exclude_underscore:
@@ -248,9 +248,9 @@ def fromdict(model, data, exclude=None, exclude_underscore=None,
             exclude += [k.key for k in info.mapper.attrs if k.key[0] == '_']
 
         include = (include or []) + (getattr(model,
-                                             'dictalchemy_fromdict_include',
+                                             'zmdictalchemy_fromdict_include',
                                              getattr(model,
-                                                     'dictalchemy_include',
+                                                     'zmdictalchemy_include',
                                                      None)) or [])
         valid_keys = [k for k in columns + synonyms
                       if k not in exclude] + include
@@ -262,9 +262,9 @@ def fromdict(model, data, exclude=None, exclude_underscore=None,
     data_primary_key= update_keys & set(primary_keys)
     if len(data_primary_key) and not allow_pk:
         msg = ("Primary keys({0}) cannot be updated by fromdict."
-               "Set 'dictalchemy_fromdict_allow_pk' to True in your Model"
+               "Set 'zmdictalchemy_fromdict_allow_pk' to True in your Model"
                " or pass 'allow_pk=True'.").format(','.join(data_primary_key))
-        raise errors.DictalchemyError(msg)
+        raise errors.ZmdictalchemyError(msg)
 
     # Update columns and synonyms
     for k in update_keys:
@@ -307,27 +307,27 @@ def make_class_dictable(
 
     Warning: This method will overwrite existing attributes if they exists.
 
-    :param exclude: Will be set as dictalchemy_exclude on the class
-    :param exclude_underscore: Will be set as dictalchemy_exclude_underscore \
+    :param exclude: Will be set as zmdictalchemy_exclude on the class
+    :param exclude_underscore: Will be set as zmdictalchemy_exclude_underscore \
             on the class
-    :param fromdict_allow_pk: Will be set as dictalchemy_fromdict_allow_pk\
+    :param fromdict_allow_pk: Will be set as zmdictalchemy_fromdict_allow_pk\
             on the class
-    :param include: Will be set as dictalchemy_include on the class.
-    :param asdict_include: Will be set as `dictalchemy_asdict_include` on the \
-            class. If not None it will override `dictalchemy_include`.
-    :param fromdict_include: Will be set as `dictalchemy_fromdict_include` on \
-            the class. If not None it will override `dictalchemy_include`.
+    :param include: Will be set as zmdictalchemy_include on the class.
+    :param asdict_include: Will be set as `zmdictalchemy_asdict_include` on the \
+            class. If not None it will override `zmdictalchemy_include`.
+    :param fromdict_include: Will be set as `zmdictalchemy_fromdict_include` on \
+            the class. If not None it will override `zmdictalchemy_include`.
 
     :returns: The class
     """
 
-    setattr(cls, 'dictalchemy_exclude', exclude)
-    setattr(cls, 'dictalchemy_exclude_underscore', exclude_underscore)
-    setattr(cls, 'dictalchemy_fromdict_allow_pk', fromdict_allow_pk)
+    setattr(cls, 'zmdictalchemy_exclude', exclude)
+    setattr(cls, 'zmdictalchemy_exclude_underscore', exclude_underscore)
+    setattr(cls, 'zmdictalchemy_fromdict_allow_pk', fromdict_allow_pk)
     setattr(cls, 'asdict', asdict)
     setattr(cls, 'fromdict', fromdict)
     setattr(cls, '__iter__', iter)
-    setattr(cls, 'dictalchemy_include', include)
-    setattr(cls, 'dictalchemy_asdict_include', asdict_include)
-    setattr(cls, 'dictalchemy_fromdict_include', fromdict_include)
+    setattr(cls, 'zmdictalchemy_include', include)
+    setattr(cls, 'zmdictalchemy_asdict_include', asdict_include)
+    setattr(cls, 'zmdictalchemy_fromdict_include', fromdict_include)
     return cls

@@ -1,11 +1,11 @@
 # vim: set fileencoding=utf-8 :
 from __future__ import absolute_import, division
 
-from dictalchemy import (
-    DictalchemyError,
+from zmdictalchemy import (
+    ZmdictalchemyError,
 )
 
-from dictalchemy.tests import (
+from zmdictalchemy.tests import (
     TestCase,
     Named,
     NamedWithOtherPk,
@@ -89,31 +89,31 @@ class TestFromdict(TestCase):
         h.fromdict({'value': 17}, include=['value'])
         assert h.value == 17
 
-    def test_dictalchemy_include_doesnt_override_pk(self):
+    def test_zmdictalchemy_include_doesnt_override_pk(self):
         h = Named('a name')
         try:
             h.fromdict({'id': 1}, include=['id'])
             assert False
-        except DictalchemyError:
+        except ZmdictalchemyError:
             assert True
 
 
 
-    def test_dictalchemy_include(self):
+    def test_zmdictalchemy_include(self):
         m = WithHybrid(2)
         m.fromdict({'value': 7})
         assert m.value == 2
-        setattr(m, 'dictalchemy_include', ['value'])
+        setattr(m, 'zmdictalchemy_include', ['value'])
         m.fromdict({'value': 7})
         assert m.value == 7
 
-    def test_dictalchemy_asdict_include_overrides(self):
+    def test_zmdictalchemy_asdict_include_overrides(self):
         m = WithHybrid(2)
         m.fromdict({'value': 7})
         assert m.value == 2
-        setattr(m, 'dictalchemy_include', ['value'])
+        setattr(m, 'zmdictalchemy_include', ['value'])
         m.fromdict({'value': 7})
-        setattr(m, 'dictalchemy_fromdict_include', [])
+        setattr(m, 'zmdictalchemy_fromdict_include', [])
         m.fromdict({'value': 2})
         assert m.value == 7
 

@@ -8,12 +8,12 @@ Errors
 from __future__ import absolute_import, division
 
 
-class DictalchemyError(Exception):
-    """Base class for Dictalchemy errors"""
+class ZmdictalchemyError(Exception):
+    """Base class for Zmdictalchemy errors"""
     pass
 
 
-class UnsupportedRelationError(DictalchemyError):
+class UnsupportedRelationError(ZmdictalchemyError):
     """Raised when a relation is not supported by asdict or fromdict.
 
     :ivar relation_key: Relation name
@@ -26,7 +26,7 @@ class UnsupportedRelationError(DictalchemyError):
         return "Relation '%r' is not supported" % (self.relation_key,)
 
 
-class MissingRelationError(DictalchemyError):
+class MissingRelationError(ZmdictalchemyError):
     """Raised when a relationship is missing
 
     :ivar relation_key: Relation name
